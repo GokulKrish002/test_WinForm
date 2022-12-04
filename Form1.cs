@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace test_WinForm
@@ -16,7 +10,6 @@ namespace test_WinForm
         {
             InitializeComponent();
         }
-
         private void comboBox_DropDown(object sender, EventArgs e)
         {
             /*btn_Submit.Enabled = true;
@@ -42,6 +35,46 @@ namespace test_WinForm
                 btn_Submit.Enabled = true;
                 btn_Submit2.Enabled = true;
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            bool input;
+            input = ValidateEmail(textBox1.Text);
+            if (input==true)
+            {
+                label1.Text = "You are Right";
+            }
+            else if(input==false)
+            {
+                label1.Text = "You are wrong";
+            }
+        }
+        public bool ValidateEmail(string email)
+        {
+            bool isValid = true;
+            if (string.IsNullOrEmpty(email))
+            {
+                isValid = false;
+            }
+            else
+            {
+                try
+                {
+                    MailAddress m = new MailAddress(email);
+                    isValid = true;
+                }
+                catch (FormatException)
+                {
+                    isValid = false;
+                }
+            }
+            return isValid;
+        }
+
+        private void label1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
